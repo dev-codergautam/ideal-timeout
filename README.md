@@ -10,7 +10,7 @@ If user will be static on website for a particular time period, that user will b
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/dev-codergautam/ideal-timeout.git
 ```
 
 Go to the project directory
