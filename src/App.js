@@ -1,7 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import {
+  addListeners,
+  removeListeners,
+  resetIdleTimeout,
+  loggedOutTime,
+} from "./idealTimeout";
 
-function App() {
+const App = () => {
+  // IDLE TIMEOUT - LOGOUT AFTER 5 HOURS IF USER IS IN STATIC MODE
+  const [loadListeners, setLoadListeners] = useState(false);
+  useEffect(() => {
+    if (!loadListeners) {
+      addListeners();
+      setLoadListeners(true);
+    }
+    resetIdleTimeout();
+    return () => {
+      removeListeners();
+      clearTimeout(loggedOutTime);
+    };
+    //eslint-disable-next-line
+  }, []);
+  // IDLE TIMEOUT - LOGOUT AFTER 5 HOURS IF USER IS IN STATIC MODE
+
   return (
     <div className="App">
       <header className="App-header">
@@ -20,6 +43,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
 export default App;
